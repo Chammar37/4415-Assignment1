@@ -30,19 +30,16 @@ def restaurantCategoryDist (data_file, city):
                 # If no key category exists 
                 category_checked = True
                 # Count the Categoies from the dataset 
-                
-                for category in restaurant_dict.keys():    
+                for category in restaurant_dict.keys():
                     if (category in row[12]):
                         restaurant_dict[category] += 1
                         category_checked = False 
-                    
                     if (category == "Others" and category_checked):
                         restaurant_dict[category] += 1
 
         sortedList = sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
-
-        
         return sortedList
+        
 #  Combine the rest of the code
 def main():
     # Arugment Validations
@@ -57,11 +54,8 @@ def main():
         data_file = sys.argv[1]
         city = sys.argv[2]
         
-        sortedList = restaurantCategoryDist(data_file, city)
-        prettyPrinting = ""
-        
-        for item in sortedList:
-            print(item[0] + ":" + str(item[1]))
+        dict = (restaurantCategoryDist(data_file, city))
+
 
 
 if __name__ == "__main__":
