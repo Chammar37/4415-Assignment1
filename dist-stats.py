@@ -6,43 +6,24 @@ def restaurantCategoryDist (data_file, city):
     with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
 
-          # Categories
-                #  Chinese,  Japanese,  Korean,  Greek, Persian/Iranian, Indian, Canadian, Mexican, American, Italian, Asian Fusion, French, Other
-        category_list = ["Chinese", "Japanese", "Korean", "Greek", "Persian/Iranian", "Indian", "Canadian", "Mexican", "American", "Italian", "Asian Fusion", "French", "Others"]
-        restaurant_dict = {
-                    "Chinese": 0,
-                    "Japanese": 0,
-                    "Korean": 0,
-                    "Greek": 0,
-                    "Persian/Iranian": 0,
-                    "Indian": 0,
-                    "Canadian": 0,
-                    "Mexican": 0,
-                    "American": 0,
-                    "Italian": 0,
-                    "Asian Fusion": 0,
-                    "French": 0,
-                    "Others": 0
-                }
-        
+        # Dict & Row
+        restaurant_dict = {}
+        spliting_row = ""
+
         for row in yelp_data:
             if row[4] == city and 'Restaurants' in row[12]:
-                # If no key category exists 
-                category_checked = True
-                # Count the Categoies from the dataset 
-                
-                for category in restaurant_dict.keys():    
-                    if (category in row[12]):
-                        restaurant_dict[category] += 1
-                        category_checked = False 
-                    
-                    if (category == "Others" and category_checked):
-                        restaurant_dict[category] += 1
+                # Splitting Row into pieaces 
+                spliting_row = row[12].split(";")
+                # Adding the pieces into Dict
+                for key in spliting_row:
+                    if (key == "Restaurants"):
+                        continue
+                    elif (key in restaurant_dict.keys()):
+                        restaurant_dict[key] += 1
+                    else:
+                        restaurant_dict[key] = 1 
 
-        sortedList = sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
-
-        
-        return sortedList
+    return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
 
 def restaurantReviewDist (data_file, city):
      with open(data_file, 'r', encoding='utf8') as business:
@@ -51,9 +32,7 @@ def restaurantReviewDist (data_file, city):
           # Categories
                 #  Chinese,  Japanese,  Korean,  Greek, Persian/Iranian, Indian, Canadian, Mexican, American, Italian, Asian Fusion, French, Other
         category_list = ["Chinese", "Japanese", "Korean", "Greek", "Persian/Iranian", "Indian", "Canadian", "Mexican", "American", "Italian", "Asian Fusion", "French", "Others"]
-        # restaurant_dict = {
-        #             "Chines
-#  Combine the rest of the code
+
 def main():
     # Arugment Validations
     if (len(sys.argv) == 0):
@@ -66,12 +45,15 @@ def main():
         # Running the data found
         data_file = sys.argv[1]
         city = sys.argv[2]
+
+        print(restaurantCategoryDist(data_file, city))
         
-        sortedList = restaurantCategoryDist(data_file, city)
-        prettyPrinting = ""
+        # Old Data
+        # sortedList = restaurantCategoryDist(data_file, city)
+        # prettyPrinting = ""
         
-        for item in sortedList:
-            print(item[0] + ":" + str(item[1]))
+        # for item in sortedList:
+        #     print(item[0] + ":" + str(item[1]))
 
 
 if __name__ == "__main__":
