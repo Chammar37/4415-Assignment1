@@ -21,9 +21,9 @@ def restaurantCategoryDist (data_file, city):
                     elif (key in restaurant_dict.keys()):
                         restaurant_dict[key] += 1
                     else:
-                        restaurant_dict[key] = 1 
+                        restaurant_dict[key] = 1
 
-    return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
+    return dict(sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True))
 
 def restaurantReviewDist (data_file, city):
     with open(data_file, 'r', encoding='utf8') as business:
@@ -42,11 +42,18 @@ def restaurantReviewDist (data_file, city):
                     if (key == "Restaurants"):
                         continue
                     elif (key in restaurant_dict.keys()):
-                        restaurant_dict[key] += 1
-                    else:
-                        restaurant_dict[key] = 1 
+                        restaurant_dict[key][0] += int(row[10])
+                        restaurant_dict[key][1] += float(row[9])
 
-    return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
+                    else:
+                        restaurant_dict[key] = [int(row[10]), float(row[9])]
+
+        # Finding Average of the stars
+        star_counter_list = restaurantCategoryDist(data_file, city)
+        for key in restaurant_dict.keys():
+            restaurant_dict[key][1] = restaurant_dict[key][1] / star_counter_list[key]
+
+    return dict(sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True))
 
 def main():
     # Arugment Validations
@@ -61,12 +68,14 @@ def main():
         data_file = sys.argv[1]
         city = sys.argv[2]
 
-        # Pretty Printing
-        category_List = restaurantCategoryDist(data_file, city)
-        prettyPrinting = ""
+        print(restaurantReviewDist(data_file, city))
+
+        # # Pretty Printing
+        # category_List = restaurantCategoryDist(data_file, city)
+        # prettyPrinting = ""
         
-        for item in category_List:
-            print(item[0] + ":" + str(item[1]))
+        # for item in category_List:
+        #     print(item[0] + ":" + str(item[1]))
 
 
 if __name__ == "__main__":
