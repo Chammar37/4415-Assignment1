@@ -26,7 +26,7 @@ def restaurantCategoryDist (data_file, city):
     return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
 
 def restaurantReviewDist (data_file, city):
-     with open(data_file, 'r', encoding='utf8') as business:
+    with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
 
         # Dict & Row
@@ -35,6 +35,18 @@ def restaurantReviewDist (data_file, city):
 
         for row in yelp_data:
             if row[4] == city and 'Restaurants' in row[12]:
+                # Splitting Row into pieaces 
+                spliting_row = row[12].split(";")
+                # Adding the pieces into Dict
+                for key in spliting_row:
+                    if (key == "Restaurants"):
+                        continue
+                    elif (key in restaurant_dict.keys()):
+                        restaurant_dict[key] += 1
+                    else:
+                        restaurant_dict[key] = 1 
+
+    return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
 
 def main():
     # Arugment Validations
