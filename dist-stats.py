@@ -29,9 +29,12 @@ def restaurantReviewDist (data_file, city):
      with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
 
-          # Categories
-                #  Chinese,  Japanese,  Korean,  Greek, Persian/Iranian, Indian, Canadian, Mexican, American, Italian, Asian Fusion, French, Other
-        category_list = ["Chinese", "Japanese", "Korean", "Greek", "Persian/Iranian", "Indian", "Canadian", "Mexican", "American", "Italian", "Asian Fusion", "French", "Others"]
+        # Dict & Row
+        restaurant_dict = {}
+        spliting_row = ""
+
+        for row in yelp_data:
+            if row[4] == city and 'Restaurants' in row[12]:
 
 def main():
     # Arugment Validations
@@ -46,14 +49,12 @@ def main():
         data_file = sys.argv[1]
         city = sys.argv[2]
 
-        print(restaurantCategoryDist(data_file, city))
+        # Pretty Printing
+        category_List = restaurantCategoryDist(data_file, city)
+        prettyPrinting = ""
         
-        # Old Data
-        # sortedList = restaurantCategoryDist(data_file, city)
-        # prettyPrinting = ""
-        
-        # for item in sortedList:
-        #     print(item[0] + ":" + str(item[1]))
+        for item in category_List:
+            print(item[0] + ":" + str(item[1]))
 
 
 if __name__ == "__main__":
