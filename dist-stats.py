@@ -37,26 +37,14 @@ def restaurantCategoryDist (data_file, city):
                     if (category == "Others" and category_checked):
                         restaurant_dict[category] += 1
 
-        sortedList = sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
-        return sortedList
+        return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
         
-#  Combine the rest of the code
-def main():
-    # Arugment Validations
-    if (len(sys.argv) == 0):
-        print("Error: There are not arugments!")
-    elif (len(sys.argv) == 1):
-         print("Error: No Data file was choosen!")
-    elif (len(sys.argv) == 2):
-         print("Error: No City file was choosen!")
-    else:
-        # Running the data found
-        data_file = sys.argv[1]
-        city = sys.argv[2]
-        
-        dict = (restaurantCategoryDist(data_file, city))
+def restaurantReviewDist (data_file, city):
+     with open(data_file, 'r', encoding='utf8') as business:
+        yelp_data = csv.reader(business, delimiter=",")
 
-
-
-if __name__ == "__main__":
-    main()
+          # Categories
+                #  Chinese,  Japanese,  Korean,  Greek, Persian/Iranian, Indian, Canadian, Mexican, American, Italian, Asian Fusion, French, Other
+        category_list = ["Chinese", "Japanese", "Korean", "Greek", "Persian/Iranian", "Indian", "Canadian", "Mexican", "American", "Italian", "Asian Fusion", "French", "Others"]
+        restaurant_dict = {
+                    "Chines
