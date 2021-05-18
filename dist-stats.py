@@ -40,6 +40,8 @@ def restaurantCategoryDist (data_file, city):
 
         return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
         
+#  Combine the rest of the code
+
 def main():
     # Arugment Validations
     if (len(sys.argv) == 0):
