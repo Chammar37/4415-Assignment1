@@ -28,17 +28,21 @@ def restaurantCategoryDist (data_file, city):
         for row in yelp_data:
             if row[4] == city and 'Restaurants' in row[12]:
                 # If no key category exists 
-                category_checked = False
+                category_checked = True
                 # Count the Categoies from the dataset 
-                for category in restaurant_dict.keys():
+                
+                for category in restaurant_dict.keys():    
                     if (category in row[12]):
                         restaurant_dict[category] += 1
-                        category_checked = True 
+                        category_checked = False 
+                    
                     if (category == "Others" and category_checked):
                         restaurant_dict[category] += 1
-                        category_checked == False
 
-        return sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
+        sortedList = sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True)
+
+        
+        return sortedList
         
 #  Combine the rest of the code
 
@@ -55,7 +59,11 @@ def main():
         data_file = sys.argv[1]
         city = sys.argv[2]
         
-        print(str(restaurantCategoryDist(data_file, city)))
+        sortedList = restaurantCategoryDist(data_file, city)
+        prettyPrinting = ""
+        
+        for item in sortedList:
+            print(item[0] + ":" + str(item[1]))
 
 
 if __name__ == "__main__":
