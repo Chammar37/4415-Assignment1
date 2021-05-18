@@ -43,9 +43,7 @@ def restaurantCategoryDist (data_file, city):
 
         
         return sortedList
-        
 #  Combine the rest of the code
-
 def main():
     # Arugment Validations
     if (len(sys.argv) == 0):
