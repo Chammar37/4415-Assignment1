@@ -7,19 +7,20 @@ def drawEdges(data_file):
     
         for row in yelp_data:
             
-            if row[4] != 'None' and row[0] == 'JJ-aSuM4pCFPdkfoZ34q0Q':
+            if row[4] != 'None':
                 # Split the friends 
                 spliting_friends = row[4].split(",")
 
-                social_network = open('yelp-network.txt', 'w')
+                social_network = open('yelp-network.txt', 'a')
 
                 # print(spliting_friends)
 
                 for friend in spliting_friends:
-                    print(row[0] + ' ' + str(friend) + "\n")
+                    # print(row[0] + ' ' + str(friend) + "\n")
                     # print("\n")
                     social_network.write(row[0] + ' ' + str(friend) + "\n") 
 
+                social_network.close()
 
 def main():
     # Arugment Validations
