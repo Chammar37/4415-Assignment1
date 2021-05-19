@@ -1,6 +1,6 @@
 import csv
 import sys
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 def restaurantCategoryDist (data_file, city):
 
@@ -74,8 +74,12 @@ def main():
         print("\ncategory:#restaurants")
 
         category_dict = list(restaurantCategoryDist(data_file, city).items())[:10]
+        category = []
+        category_counter = []
 
         for key in category_dict:
+            category.append(key[0])
+            category_counter.append(key[1])
             print(key[0] + ":" + str(key[1]))
 
         #print review
@@ -85,6 +89,13 @@ def main():
         for key in review_dict:
             print(key[0] + ":" + str(key[1][0]) + ":"+ str("{:.1f}".format(key[1][1])))
 
+         # Draw the Bar Graph
+        plt.figure(figsize=(16, 5))
+        plt.bar(category,category_counter)
+        plt.title("Restaurant Category Distribution")
+        plt.xlabel("Categories")
+        plt.ylabel("Number of Restaurant")
+        plt.show()
 
 if __name__ == "__main__":
     main()
