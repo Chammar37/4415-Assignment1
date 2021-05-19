@@ -83,7 +83,7 @@ def main():
         review_dict = list(restaurantReviewDist(data_file,city).items())[:10]
         
         for key in review_dict:
-            print(key[0] + ":" + str(key[1]))
+            print(key[0] + ":" + str(key[1][0]) + ":"+ str("{:.1f}".format(key[1][1])))
 
 
 if __name__ == "__main__":
