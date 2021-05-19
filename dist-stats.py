@@ -1,5 +1,6 @@
 import csv
 import sys
+import matplotlib as plt
 
 def restaurantCategoryDist (data_file, city):
 
@@ -55,6 +56,7 @@ def restaurantReviewDist (data_file, city):
 
     return dict(sorted(restaurant_dict.items(), key=lambda item: item[1], reverse=True))
 
+
 def main():
     # Arugment Validations
     if (len(sys.argv) == 0):
@@ -68,14 +70,20 @@ def main():
         data_file = sys.argv[1]
         city = sys.argv[2]
 
-        print(restaurantReviewDist(data_file, city))
+        # print category
+        print("\ncategory:#restaurants")
 
-        # # Pretty Printing
-        # category_List = restaurantCategoryDist(data_file, city)
-        # prettyPrinting = ""
+        category_dict = list(restaurantCategoryDist(data_file, city).items())[:10]
+
+        for key in category_dict:
+            print(key[0] + ":" + str(key[1]))
+
+        #print review
+        print("\ncategory:#reviews:avg_stars")
+        review_dict = list(restaurantReviewDist(data_file,city).items())[:10]
         
-        # for item in category_List:
-        #     print(item[0] + ":" + str(item[1]))
+        for key in review_dict:
+            print(key[0] + ":" + str(key[1]))
 
 
 if __name__ == "__main__":
