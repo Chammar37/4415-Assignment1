@@ -27,7 +27,7 @@ def avgStars(data_file, city):
                 starsCount += float(row[9])
                 counter += 1
 
-    return starsCount / counter
+    return "{:.2f}".format(starsCount / counter)
 
 
 def numOfRestaurants(data_file, city):
@@ -56,7 +56,7 @@ def avgStarsRestaurants(data_file, city):
                 resStarsCount += float(row[9])
                 counter += 1
 
-    return resStarsCount / counter
+    return "{:.2f}".format(resStarsCount / counter)
 
 def avgNumOfReviews(data_file, city):
     # Review Counters
@@ -75,7 +75,7 @@ def avgNumOfReviews(data_file, city):
     if (review_counter != 0 and total_bus != 0):
         avg_res_review = review_counter / total_bus
 
-    return avg_res_review
+    return "{:.2f}".format(avg_res_review)
 
 def avgNumOfReviewsBus(data_file, city):
     # Review Counters
@@ -94,7 +94,7 @@ def avgNumOfReviewsBus(data_file, city):
     if (review_counter != 0 and res_counter != 0):
         avg_res_review = review_counter / res_counter
 
-    return avg_res_review
+    return "{:.2f}".format(avg_res_review)
 
 def main():
     # Arugment Validations
@@ -110,17 +110,17 @@ def main():
         city = sys.argv[2]
         
         # numOfBus
-        print("The number of business in " + city + " are " + str(numOfBus(data_file, city)) + "\n")
+        print("The number of business in " + city + " is " + str(numOfBus(data_file, city)) + "\n")
         # avgStars
-        print(str(avgStars(data_file, city)))
+        print("The average number of stars of a business in " + city +" are " + str(avgStars(data_file, city)))
         # Num of Restaurants
-        print("\nThe average number of reviews for restaurants in " + city + str(numOfRestaurants(data_file, city)))
+        print("\nThe average number of reviews for restaurants in " + city + " is " + str(numOfRestaurants(data_file, city)))
         #avg Stars Restaurants
-        print("\nThe average number of stars for all the Restaurants in " + city + str(avgStarsRestaurants(data_file, city)) )
+        print("\nThe average number of stars for all the Restaurants in " + city + " is " + str(avgStarsRestaurants(data_file, city)) )
         #Avg Number of Reviews
-        print("\nThe average number of reviews for all business in "+ city + str(avgNumOfReviews(data_file, city)))
+        print("\nThe average number of reviews for all business in "+ city + " is " + str(avgNumOfReviews(data_file, city)))
         #Average Number of Reviews for Restaurants
-        print("\nThe average number of reviews for all restaurants in "+ city + str(avgNumOfReviewsBus(data_file, city))) 
+        print("\nThe average number of reviews for all restaurants in "+ city + " is " +str(avgNumOfReviewsBus(data_file, city))) 
 
 if __name__ == "__main__":
     main()
