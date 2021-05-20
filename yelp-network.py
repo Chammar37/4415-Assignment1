@@ -1,5 +1,6 @@
 import csv
 import sys
+import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -7,28 +8,22 @@ def drawEdges(data_file):
 
     with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
-    
-        for row in yelp_data:
-            
-            if row[4] != 'None':
-      
-                spliting_friends = row[4].split(",")
-                # To add the data in TXT file
-                social_network = open('yelp-network.txt', 'a')
 
+        for row in yelp_data:
+            if row[4] != 'None':
+                # Split friends
+                spliting_friends = row[4].split(",")
+                # Open New File for Data
+                social_network = open('yelp-network.txt', 'a')
+                
                 for friend in spliting_friends:
                     social_network.write(row[0] + ' ' + friend + "\n")
 
                 social_network.close()
-
-    with open ('yelp-network.txt', 'r', encoding='utf8') as network:
-        social_data = csv.reader(network, delimiter=",")
-        
-        # for row in social_data:
-        print(social_data)
+    
+    # with open('yelp-network.txt', 'r', encoding='utf8') as network:
 
 def main():
-
     # Helper 
     # G = nx.Graph()
     # G.add_node('A')
