@@ -9,14 +9,21 @@ def drawEdges(data_file):
 
     with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
+
+        spliting_friends = []
+
     
         for row in yelp_data:
             
             if row[4] != 'None':
                 # Split the friends     
                 # spliting_friends = row[4].split(",")
-                splitting_dict = {}
-                # row[4].split(",")
+                
+                spliting_friends = row[4].split(",")
+
+                for friend in spliting_friends:
+                    if ((friend, row[0]) not in spliting_friends):
+                        spliting_friends.append((row[0], friend))
 
                 # To add the data in TXT file
                 # social_network = open('yelp-network.txt', 'a')
@@ -25,12 +32,8 @@ def drawEdges(data_file):
                 # print(spliting_friends)
 
                 # Add user
-                if not row[0] in splitting_dict.keys():
-                    splitting_dict[row[0]] = row[4].split(",")
-                    print(row[4].split(","))
-                    # splitting_dict = {row[0]:row[4].split(",")}
                 # for friend in spliting_friends:
-                #      # Add User frined
+                #     #  Add User frined
                 #     if friend not in G.nodes():
                 #         G.add_node(friend)
                     
@@ -38,9 +41,20 @@ def drawEdges(data_file):
 
 
                     # social_network.write(row[0] + ' ' + str(friend) + "\n") 
-        
+    G = nx.Graph()
 
-        print(splitting_dict)
+    for user in spliting_friends:
+        print(user)
+        # G.add_node(user[0])
+        # G.add_node(user[1])
+        # G.add_edge(user[0], user[1])
+    
+    # social_network = open('yelp-network.txt', 'a')
+
+    # for edge in G.edges():
+    # #    social_network.write(edge[0] + ' ' + edge[1] + "\n")
+    #     print(edge)
+
 
 def main():
 
