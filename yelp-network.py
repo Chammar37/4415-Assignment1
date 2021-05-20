@@ -23,12 +23,13 @@ def drawEdges(data_file):
                 # social_network.close()
 
                 # print(spliting_friends)
-
+                # print(row[4].split(","))
                 # Add user
                 if not row[0] in splitting_dict.keys():
-                    splitting_dict[row[0]] = row[4].split(",")
-                    print(row[4].split(","))
-                    # splitting_dict = {row[0]:row[4].split(",")}
+                    friends = row[4].split(",")
+                    for friend in friends:
+                        splitting_dict[row[0]] = friend
+                        
                 # for friend in spliting_friends:
                 #      # Add User frined
                 #     if friend not in G.nodes():
