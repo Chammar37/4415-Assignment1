@@ -9,7 +9,7 @@ def drawEdges(data_file):
     G = nx.Graph()  
 
     # Importing data from Yelp to TXT file
-    social_network = open('yelp-networkTest_4.txt', 'w')
+    social_network = open('yelp-network.txt', 'w')
     
     with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
@@ -28,23 +28,7 @@ def drawEdges(data_file):
                 
     social_network.close()
 
-    print("Fuck Marc")
-    
-
 def main():
-    # Helper 
-    # G = nx.Graph()
-    # G.add_node('A')
-    # G.add_node('B')
-    # G.add_node('C')
-    # G.add_edge('A', 'B')
-    # G.add_edge('B', 'A')
-    # G.add_edge('B', 'C')
-    # print(G.nodes())
-    # print(G.edges())
-    # nx.draw(G)
-    # plt.show()
-
     # Arugment Validations
     if (len(sys.argv) == 0):
         print("Error: There are not arugments!")
