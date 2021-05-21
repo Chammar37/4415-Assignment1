@@ -5,14 +5,13 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 def drawEdges(data_file):
-
+    # User list
     G = nx.Graph()  
-
     # Importing data from Yelp to TXT file
     social_network = open('yelp-network.txt', 'w')
     
-    with open(data_file, 'r', encoding='utf8') as business:
-        yelp_data = csv.reader(business, delimiter=",")
+    with open(data_file, 'r', encoding='utf8') as users:
+        yelp_data = csv.reader(users, delimiter=",")
         
         for col in yelp_data:
             if col[4] != 'None':
