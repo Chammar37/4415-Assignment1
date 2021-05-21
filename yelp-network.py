@@ -6,22 +6,30 @@ import matplotlib.pyplot as plt
 
 def drawEdges(data_file):
 
+    G = nx.Graph()  
+
+    # Importing data from Yelp to TXT file
+    social_network = open('yelp-networkTest_4.txt', 'w')
+    
     with open(data_file, 'r', encoding='utf8') as business:
         yelp_data = csv.reader(business, delimiter=",")
-
-        for row in yelp_data:
-            if row[4] != 'None':
+        
+        for col in yelp_data:
+            if col[4] != 'None':
                 # Split friends
-                spliting_friends = row[4].split(",")
-                # Open New File for Data
-                social_network = open('yelp-network.txt', 'a')
-                
-                for friend in spliting_friends:
-                    social_network.write(row[0] + ' ' + friend + "\n")
+                spliting_friends = col[4].split(', ')
 
-                social_network.close()
+                if col[0] not in G.nodes():
+                    G.add_node(col[0])
+
+                for friend in spliting_friends:
+                    if friend not in G.nodes():
+                        social_network.write(col[0] + ' ' + friend + "\n") 
+                
+    social_network.close()
+
+    print("Fuck Marc")
     
-    # with open('yelp-network.txt', 'r', encoding='utf8') as network:
 
 def main():
     # Helper 
