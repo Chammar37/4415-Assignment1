@@ -3,9 +3,8 @@ import sys
 import networkx as nx
 
 def graph_stats (data_file):
-    # Nodes and Edges
-    G = nx.Graph()
-    number_of_edges = 0
+    # Nodes and Edges Dict
+    network_graph = {}
 
     with open(data_file, 'r', encoding='utf8') as friends:
         yelp_data  = csv.reader(friends, delimiter=",")
@@ -14,17 +13,35 @@ def graph_stats (data_file):
             if (col[0] != 'user_id friends'):
                 # Split frineds 
                 spliting_nodes = col[0].split(' ')
-                # Check user and friend node before adding to graph
-                if spliting_nodes[0] not in G.nodes():
-                    G.add_node(spliting_nodes[0])
-                if spliting_nodes[1] not in G.nodes():
-                    G.add_node(spliting_nodes[1])
 
-                # G.add_edge(spliting_nodes[0], spliting_nodes[1])
+                if spliting_nodes[0] not in network_graph.keys():
+                    network_graph[spliting_nodes[0]] = 1
+                else:
+                    network_graph[spliting_nodes[0]] += 1
+                if spliting_nodes[1] not in network_graph.keys():
+                    network_graph[spliting_nodes[1]] = 1
+                else:
+                    network_graph[spliting_nodes[1]] += 1
+
+    number_of_nodes = len(network_graph.keys())
+    number_of_edges = 0
+    print("Number of nodes: " + str(number_of_nodes))
     
-    print("Fuck Marc")
-    print("Number of nodes: " + len(G.nodes()))
-    print("Number of edges: " + len(G.edges()))
+    for node in network_graph.keys():
+        number_of_edges += network_graph[node]
+    number_of_edges = int(number_of_edges / 2)
+    print("Number of edges: " + str(number_of_edges))
+    
+    # nodeDegree(network_graph)
+    print(avgNodeDegree(number_of_nodes, number_of_edges))
+
+def nodeDegree(network_graph):
+    for key, value in sorted(network_graph.items(), key=lambda item: item[1], reverse=True):
+        print(key + ": " + str(value))
+
+def avgNodeDegree(number_of_node, number_of_edge):
+    avgNodeDegree = (number_of_edge * 2) / number_of_node
+    return "avgNodeDegree:" + str(avgNodeDegree)
 
 def main():
     # Arugment Validations
@@ -41,5 +58,5 @@ def main():
 
         graph_stats(data_file)
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
