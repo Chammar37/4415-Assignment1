@@ -13,6 +13,7 @@ yelp_checkin.csv
 yelp_review.csv
 yelp_tip.csv
 yelp_user.csv
+yelp-networkTEST.txt
 
 # Executables
 *.swf

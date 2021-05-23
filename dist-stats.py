@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 def restaurantCategoryDist (data_file, city):
 
-    with open(data_file, 'r', encoding='utf8') as business:
-        yelp_data = csv.reader(business, delimiter=",")
+    with open(data_file, 'r', encoding='utf8') as business: #Open the file in read mode (sent by command line paramter)
+        yelp_data = csv.reader(business, delimiter=",") #set delimeter to ,
 
         # Dict & Row
         restaurant_dict = {}
