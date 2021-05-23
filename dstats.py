@@ -122,7 +122,7 @@ def main(): #Main method to manage command line arguments, files being sent and 
         #Average Number of Reviews for Restaurants
         print("\nThe average number of reviews for all restaurants in "+ city + " is " +str(avgNumOfReviewsBus(data_file, city))) 
 
-#Establish the main method.
+#Establish the main method
 if __name__ == "__main__":
     main()
 
