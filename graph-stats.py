@@ -22,7 +22,14 @@ def graph_stats (data_file):
                     network_graph[spliting_nodes[1]] = 1 #Setting the the value to 1 for that new key
                 else:
                     network_graph[spliting_nodes[1]] += 1 #If the user is already in the list, increase the counter for that specific key 
-
+        #This logic in the for-loop solves the issue of adding repeated instances of the user
+        # For example:
+        #  user1 : friend1
+        #  user1 : friend2
+        # ...
+        #The Node degree for this instance is 2
+        #Therefore the output for user1 node degree is: user1 : 2
+    
     number_of_nodes = len(network_graph.keys()) #Retrieve the number of nodes for the Graph 
     number_of_edges = 0 #Set the number of edges 
     print("Number of nodes: " + str(number_of_nodes)) #Print out the number of nodes
